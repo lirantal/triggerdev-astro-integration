@@ -15,7 +15,7 @@ export default function triggerdevAstroIntegration(options) {
         injectRoute,
         updateConfig,
       }) => {
-        if (config.output === "static") {
+        if (astroConfig.output === "static") {
           throw new Error(
             `[${astroIntegrationName}] \`output: "server"\` or \`output: "hybrid"\` is required to use this Astro integration.`
           );
