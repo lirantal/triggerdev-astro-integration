@@ -1,15 +1,22 @@
 {
-  "name": "triggerdev-astro-plugin",
+  "name": "triggerdev-astro-integration",
   "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
+  "version": "1.0.0",
+  "scripts": {},
+  "peerDependencies": {
     "astro": "^2.10.7"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lirantal/triggerdev-astro-integration.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lirantal/triggerdev-astro-integration/issues"
+  },
+  "homepage": "https://github.com/lirantal/triggerdev-astro-integration#readme",
+  "author": {
+    "name": "Liran Tal",
+    "email": "liran.tal@gmail.com"
   }
 }
