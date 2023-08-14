@@ -5,7 +5,7 @@ import packageMeta from "./package.json";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const astroIntegrationName = packageMeta.name;
 
-export default function triggerdevAstroPlugin(options) {
+export default function triggerdevAstroIntegration(options) {
   return {
     name: astroIntegrationName,
     hooks: {
