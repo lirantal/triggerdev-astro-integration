@@ -2,6 +2,8 @@
   "name": "triggerdev-astro-integration",
   "description": "An Astro-native integration for Trigger.dev background jobs platform",
   "version": "1.0.0",
+  "type": "module",
+  "main": "main.js",
   "scripts": {},
   "peerDependencies": {
     "astro": "^2.10.7"
