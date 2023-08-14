@@ -3,11 +3,11 @@ import { fileURLToPath } from "url";
 import packageMeta from "./package.json";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const pluginName = packageMeta.name;
+const astroIntegrationName = packageMeta.name;
 
 export default function triggerdevAstroPlugin(options) {
   return {
-    name: pluginName,
+    name: astroIntegrationName,
     hooks: {
       "astro:config:setup": ({
         config: astroConfig,
@@ -15,6 +15,12 @@ export default function triggerdevAstroPlugin(options) {
         injectRoute,
         updateConfig,
       }) => {
+        if (config.output === "static") {
+          throw new Error(
+            `[${astroIntegrationName}] \`output: "server"\` or \`output: "hybrid"\` is required to use this Astro integration.`
+          );
+        }
+
         injectRoute({
           pattern: "/api/trigger",
           entryPoint: join(__dirname, "./route.js"),
