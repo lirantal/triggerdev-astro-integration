@@ -1,6 +1,6 @@
 {
   "name": "triggerdev-astro-integration",
-  "type": "module",
+  "description": "An Astro-native integration for Trigger.dev background jobs platform",
   "version": "1.0.0",
   "scripts": {},
   "peerDependencies": {
@@ -18,5 +18,8 @@
   "author": {
     "name": "Liran Tal",
     "email": "liran.tal@gmail.com"
+  },
+  "dependencies": {
+    "@trigger.dev/sdk": "^2.0.8"
   }
 }
