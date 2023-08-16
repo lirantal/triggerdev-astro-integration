@@ -1,28 +1,48 @@
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-import packageMeta from "./package.json";
+export function createAstroRoute(client) {
+  return async function astroRoute(ctx) {
+    if (ctx.request.method === "HEAD") {
+      return new Response(null, { status: 200 });
+    }
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const astroIntegrationName = packageMeta.name;
+    try {
+      // Prepare the request to be a fetch-compatible Request object:
+      const requestHeaders = ctx.request.headers;
+      const requestMethod = ctx.request.method;
+      const responseHeaders = Object.create(null);
 
-export default function triggerdevAstroIntegration(options) {
-  return {
-    name: astroIntegrationName,
-    hooks: {
-      "astro:config:setup": ({ injectRoute }) => {
-        injectRoute({
-          pattern: "/api/trigger",
-          entryPoint: join(__dirname, "./route.js"),
+      for (const [headerName, headerValue] of requestHeaders.entries()) {
+        responseHeaders[headerName] = headerValue;
+      }
+
+      // Create a new Request object to be passed to the TriggerClient
+      // where we pass the clone the incoming request metadata such as
+      // headers, method, body.
+      const request = new Request("https://express.js/api/trigger", {
+        headers: responseHeaders,
+        method: requestMethod,
+        body: ctx.request.body ? JSON.stringify(ctx.request.body) : ctx.request,
+        duplex: "half",
+      });
+
+      // This handshake handler knows how to authenticate requests,
+      // call the run() function of the job, and so on
+      const response = await client.handleRequest(request);
+
+      if (!response) {
+        return new Response(JSON.stringify({ error: "Not found" }), {
+          status: 404,
         });
-      },
+      }
 
-      "astro:config:done": ({ config }) => {
-        if (config.output === "static") {
-          throw new Error(
-            `[${astroIntegrationName}] \`output: "server"\` or \`output: "hybrid"\` is required to use this Astro integration.`
-          );
-        }
-      },
-    },
+      // Optionally can do something with the job's finished
+      // execution's response body
+      return new Response(JSON.stringify(response.body), {
+        status: response.status,
+      });
+    } catch (err) {
+      return new Response(JSON.stringify({ error: "Internal server error" }), {
+        status: 500,
+      });
+    }
   };
 }
