@@ -20,7 +20,7 @@ export function createAstroRoute(client) {
       const request = new Request("https://express.js/api/trigger", {
         headers: responseHeaders,
         method: requestMethod,
-        body: ctx.request.body ? JSON.stringify(ctx.request.body) : ctx.request,
+        body: ctx.request.body ? ctx.request.body : ctx.request,
         duplex: "half",
       });
 

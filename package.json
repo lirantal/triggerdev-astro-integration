@@ -1,7 +1,7 @@
 {
   "name": "triggerdev-astro-integration",
   "description": "An Astro-native integration for Trigger.dev background jobs platform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "main": "main.js",
   "scripts": {},
