@@ -29,6 +29,10 @@ See the [Trigger.dev Astro example project repository](https://github.com/lirant
 
 MIT
 
+## Contributing
+
+Please consult [CONTRIBUTING](./CONTRIBUTING.md) for guidelines on contributing to this project.
+
 ## Author
 
 (c) Liran Tal <liran@lirantal.com>
